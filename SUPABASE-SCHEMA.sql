@@ -19,6 +19,8 @@ CREATE TABLE planners (
   availability TEXT DEFAULT 'available',
   bio TEXT,
   status TEXT DEFAULT 'pending',
+  stripe_customer_id TEXT,
+  stripe_account_id TEXT,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
@@ -64,13 +66,14 @@ CREATE TABLE placements (
 -- ============================================================
 CREATE TABLE commissions (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  placement_id UUID NOT NULL REFERENCES placements(id),
-  amount NUMERIC(10,2) NOT NULL,
-  status TEXT DEFAULT 'pending',
-  invoice_sent_at TIMESTAMPTZ,
-  paid_at TIMESTAMPTZ,
-  stripe_payment_id TEXT,
-  created_at TIMESTAMPTZ DEFAULT now()
+  planner_id UUID NOT NULL REFERENCES planners(id),
+  couple_name TEXT NOT NULL,
+  booking_amount NUMERIC(10,2) NOT NULL,
+  luminary_amount NUMERIC(10,2) NOT NULL,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'invoiced', 'paid')),
+  stripe_payment_intent_id TEXT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  paid_at TIMESTAMPTZ
 );
 
 -- ============================================================
@@ -91,6 +94,8 @@ CREATE INDEX idx_planners_status ON planners(status);
 CREATE INDEX idx_enquiries_status ON couples_enquiries(status);
 CREATE INDEX idx_enquiries_region ON couples_enquiries(region);
 CREATE INDEX idx_placements_status ON placements(status);
+CREATE INDEX idx_commissions_planner ON commissions(planner_id);
+CREATE INDEX idx_commissions_status ON commissions(status);
 
 -- ============================================================
 -- ROW LEVEL SECURITY

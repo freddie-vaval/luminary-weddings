@@ -2,6 +2,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PlannersFilter from "@/components/PlannersFilter";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Our Planners — Luminary Weddings",
   description:

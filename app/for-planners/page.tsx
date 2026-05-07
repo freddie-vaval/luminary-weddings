@@ -34,6 +34,8 @@ const BENEFITS = [
   },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default function ForPlannersPage() {
   return (
     <>

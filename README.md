@@ -1,8 +1,42 @@
 # Luminary Weddings
 
-A curated marketplace connecting couples with the UK's most exceptional wedding planners.
+**Live:** https://luminaryweddings.com _(deploy in progress)_
 
-**Live:** [luminaryweddings.com](https://luminaryweddings.com) _(deploy in progress)_
+A curated marketplace connecting couples with the UK's most exceptional wedding planners.
+Commission: **25%** — taken from the planner on confirmed bookings only. Couples pay planners directly.
+
+---
+
+## What We Built
+
+| Page | File | Status |
+|---|---|---|
+| Landing page | `app/page.tsx` | ✅ |
+| Planners listing + filters | `app/planners/page.tsx` | ✅ |
+| How It Works | `app/how-it-works/page.tsx` | ✅ |
+| For Planners (application form) | `app/for-planners/page.tsx` | ✅ |
+| Planner dashboard | `app/dashboard/page.tsx` | ✅ |
+| Stripe commission payment | `app/api/create-payment-intent/route.ts` | ✅ |
+| Stripe webhook | `app/api/webhook/stripe/route.ts` | ✅ |
+| Tally webhook | `app/api/tally-webhook/route.ts` | ✅ |
+| SEO sitemap | `app/sitemap.ts` | ✅ |
+| Commission estimator | Built into `/for-planners` | ✅ |
+| Facebook + Google Ads strategy | `FACEBOOK-GOOGLE-AD-SETUP.md` | ✅ |
+| SEO + AEO strategy | `SEO-AEO-STRATEGY.md` | ✅ |
+| Planner outreach sequence | `PLANNER-OUTREACH.md` | ✅ |
+| Supabase schema | `SUPABASE-SCHEMA.sql` | ✅ |
+
+---
+
+## Commission Model
+
+```
+Couple books planner for: £12,000
+Luminary Weddings (25%): £3,000  ← paid by planner
+Planner receives: £9,000           ← paid directly by couple
+```
+
+Couples pay planners directly. We invoice the planner via Stripe after booking confirmation.
 
 ---
 
@@ -12,61 +46,55 @@ A curated marketplace connecting couples with the UK's most exceptional wedding 
 |---|---|
 | Frontend | Next.js 14 (App Router, TypeScript) |
 | Hosting | Vercel |
-| Database | Supabase (Postgres) |
+| Database | Supabase |
 | Forms | Tally |
 | Email | Resend |
-| Payments | Stripe Connect |
-| Images | Cloudinary |
+| Payments | Stripe |
+| Images | Unsplash + real planner photos (scraped) |
 
 ---
 
-## Quick Start
+## Setup
 
 ```bash
-# 1. Install dependencies
+# 1. Install
 npm install
 
-# 2. Set up environment variables
+# 2. Environment variables
 cp .env.local.example .env.local
-# Fill in your Supabase, Resend, Stripe, and Tally credentials
+# Fill in all keys (see below)
 
-# 3. Run database migration
-# Copy SUPABASE-SCHEMA.sql into your Supabase dashboard → SQL Editor → Run
+# 3. Push Supabase schema
+# Copy SUPABASE-SCHEMA.sql → Supabase dashboard → SQL Editor → Run
 
-# 4. Run locally
+# 4. Create Tally form → get form ID → replace rXXXXX in:
+#    components/CTASection.tsx (formId prop)
+#    app/api/tally-webhook/route.ts (formId check if needed)
+
+# 5. Run locally
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
 ---
 
-## Project Structure
+## Environment Variables
 
-```
-app/
-  page.tsx              # Landing page
-  planners/page.tsx     # Planners listing
-  how-it-works/page.tsx # How It Works page
-  for-planners/page.tsx # Planner application form
-  sitemap.ts            # SEO sitemap
-  api/tally-webhook/    # Form submission handler
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 
-components/
-  Navigation.tsx
-  Hero.tsx
-  HowItWorks.tsx
-  PlannersGrid.tsx
-  PlannersFilter.tsx   # Client-side filterable grid
-  Testimonials.tsx
-  CTASection.tsx
-  Footer.tsx
-  TallyForm.tsx
+# Stripe
+STRIPE_SECRET_KEY=           # sk_live_... or sk_test_...
+STRIPE_WEBHOOK_SECRET=       # whsec_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=  # pk_live_... or pk_test_...
 
-lib/
-  supabase.ts           # Supabase client
+# Resend
+RESEND_API_KEY=
 
-SUPABASE-SCHEMA.sql     # Run this in Supabase dashboard
+# App
+NEXT_PUBLIC_APP_URL=https://luminaryweddings.com
 ```
 
 ---
@@ -74,39 +102,41 @@ SUPABASE-SCHEMA.sql     # Run this in Supabase dashboard
 ## Deploy to Vercel
 
 ```bash
-# Push to GitHub, then:
-# 1. Go to vercel.com → Import Project
-# 2. Select your repo
-# 3. Add environment variables from .env.local.example
+# Push to GitHub (already done)
+gh repo view freddie-vaval/luminary-weddings
+
+# 1. Go to vercel.com → Import Project → select luminary-weddings repo
+# 2. Framework: Next.js (auto-detected)
+# 3. Add environment variables from .env.local
 # 4. Deploy
+
+# Custom domain: buy luminaryweddings.com → Vercel → Domains → Add
 ```
 
 ---
 
-## TODO
+## To-Do Before Launch
 
-- [ ] Connect Supabase (fill in env vars, uncomment DB insert in API route)
-- [ ] Create Tally form and add form ID to `components/CTASection.tsx`
-- [ ] Set up Resend email for enquiry confirmation
-- [ ] Add planner photos to `components/PlannersFilter.tsx` (from scraped data)
-- [ ] Connect Stripe Connect for commission tracking
-- [ ] Build planner dashboard (`/dashboard`)
-- [ ] Add planner authentication via Supabase Auth
-- [ ] Add OG image to `public/og-image.jpg`
+- [ ] Create Tally enquiry form (tally.so) → get form ID
+- [ ] Connect Supabase → run schema SQL
+- [ ] Add Stripe keys to Vercel env vars
+- [ ] Add Resend API key
+- [ ] Set up Stripe webhook pointing to `/api/webhook/stripe`
+- [ ] Seed 5 planners into Supabase
+- [ ] Create GBP (Google Business Profile) listing
+- [ ] Submit sitemap to Google Search Console
+- [ ] Buy domain → point to Vercel
 
 ---
 
-## Commission Model
+## First 30 Days
 
-We take **25%** of the confirmed planning fee from the planner — not from the couple.
-
-```
-Planning fee: £12,000
-Luminary Weddings: £3,000 (25%)
-Planner receives: £9,000
-```
-
-Couples pay the planner directly. We invoice the planner separately.
+| Week | Focus |
+|---|---|
+| Week 1 | Deploy site, set up Stripe/Supabase, seed data, create GBP |
+| Week 2 | Publish SEO content cluster (4 guide pages), start Facebook ads |
+| Week 3 | Cold email outreach to 50 UK wedding planners |
+| Week 4 | Google Ads campaign launch, A/B test copy |
 
 ---
 
