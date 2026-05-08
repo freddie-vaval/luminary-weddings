@@ -3,14 +3,16 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import { supabaseAdmin } from "@/lib/supabase";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-04-22.dahlia",
-});
+// Lazy init to avoid build-time env var issues
+const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY ?? "sk_test_placeholder");
+const getResend = () => new Resend(process.env.RESEND_API_KEY ?? "re_placeholder");
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+// Disable body parsing so we can read the raw body for Stripe signature verification
+
 
 // Disable body parsing so we can read the raw body for Stripe signature verification
 export async function POST(req: NextRequest) {
+  const stripe = getStripe();
   const rawBody = await req.text();
   const sig = req.headers.get("stripe-signature")!;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -52,6 +54,7 @@ export async function POST(req: NextRequest) {
 
     // Send confirmation email to planner via Resend
     try {
+      const resend = getResend();
       await resend.emails.send({
         from: "Luminary Weddings <hello@luminaryweddings.com>",
         to: planner_email,

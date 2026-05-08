@@ -2,13 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabase";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-04-22.dahlia",
-});
+const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY ?? "sk_test_placeholder");
 
 // GET /api/request-payout?planner_id=xxx
 // Creates a Stripe Payment Link for the planner to pay their outstanding commissions
 export async function GET(req: NextRequest) {
+  const stripe = getStripe();
   const plannerId = req.nextUrl.searchParams.get("planner_id");
 
   if (!plannerId) {

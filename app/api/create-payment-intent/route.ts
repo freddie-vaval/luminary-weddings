@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabase";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-04-22.dahlia",
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
 
 export async function POST(req: NextRequest) {
   try {
@@ -43,16 +41,15 @@ export async function POST(req: NextRequest) {
     const luminaryAmount = Math.round(numericAmount * 0.25 * 100) / 100;
 
     // Create or find existing pending commission for this couple + planner
-    // (to avoid duplicate payment intents for the same booking)
     const { data: existingCommission } = await supabaseAdmin
       .from("commissions")
-      .select("id, stripe_payment_id")
+      .select("id, stripe_payment_intent_id")
       .eq("planner_id", planner_id)
       .eq("couple_name", couple_name)
       .eq("status", "pending")
       .maybeSingle();
 
-    if (existingCommission?.stripe_payment_id) {
+    if (existingCommission?.stripe_payment_intent_id) {
       return NextResponse.json(
         { error: "A pending payment already exists for this booking. Use the existing payment intent." },
         { status: 409 }
@@ -61,7 +58,7 @@ export async function POST(req: NextRequest) {
 
     // Create Stripe PaymentIntent
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(luminaryAmount * 100), // convert to pence/cents
+      amount: Math.round(luminaryAmount * 100),
       currency: "gbp",
       description: `Luminary Weddings commission — ${couple_name}`,
       metadata: {
