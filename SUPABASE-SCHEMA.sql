@@ -1,10 +1,10 @@
-# Luminary Weddings — Supabase SQL Schema
-# Run this in your Supabase dashboard → SQL Editor
+-- Luminary Weddings — Supabase SQL Schema (clean)
+-- Run this in Supabase Dashboard → SQL Editor
 
 -- ============================================================
 -- PLANNERS
 -- ============================================================
-CREATE TABLE planners (
+CREATE TABLE IF NOT EXISTS planners (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   company TEXT,
@@ -30,7 +30,7 @@ CREATE TABLE planners (
 -- ============================================================
 -- COUPLES ENQUIRIES
 -- ============================================================
-CREATE TABLE couples_enquiries (
+CREATE TABLE IF NOT EXISTS couples_enquiries (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   couple_name TEXT NOT NULL,
   email TEXT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE couples_enquiries (
 -- ============================================================
 -- PLACEMENTS
 -- ============================================================
-CREATE TABLE placements (
+CREATE TABLE IF NOT EXISTS placements (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   enquiry_id UUID NOT NULL REFERENCES couples_enquiries(id),
   planner_id UUID NOT NULL REFERENCES planners(id),
@@ -66,22 +66,22 @@ CREATE TABLE placements (
 -- ============================================================
 -- COMMISSIONS
 -- ============================================================
-CREATE TABLE commissions (
+CREATE TABLE IF NOT EXISTS commissions (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   planner_id UUID NOT NULL REFERENCES planners(id),
   couple_name TEXT NOT NULL,
   booking_amount NUMERIC(10,2) NOT NULL,
   luminary_amount NUMERIC(10,2) NOT NULL,
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'invoiced', 'paid')),
+  status TEXT DEFAULT 'pending',
   stripe_payment_intent_id TEXT,
   created_at TIMESTAMPTZ DEFAULT now(),
   paid_at TIMESTAMPTZ
 );
 
 -- ============================================================
--- LANDING PAGE CTA CLICKS (analytics)
+-- LANDING PAGE CTA CLICKS
 -- ============================================================
-CREATE TABLE landing_page_cta_clicks (
+CREATE TABLE IF NOT EXISTS landing_page_cta_clicks (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   click_type TEXT NOT NULL,
   session_id TEXT,
@@ -91,25 +91,10 @@ CREATE TABLE landing_page_cta_clicks (
 -- ============================================================
 -- INDEXES
 -- ============================================================
-CREATE INDEX idx_planners_region ON planners(region);
-CREATE INDEX idx_planners_status ON planners(status);
-CREATE INDEX idx_enquiries_status ON couples_enquiries(status);
-CREATE INDEX idx_enquiries_region ON couples_enquiries(region);
-CREATE INDEX idx_placements_status ON placements(status);
-CREATE INDEX idx_commissions_planner ON commissions(planner_id);
-CREATE INDEX idx_commissions_status ON commissions(status);
-
--- ============================================================
--- ROW LEVEL SECURITY
--- ============================================================
-ALTER TABLE couples_enquiries ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "planners_see_own_enquiries" ON couples_enquiries
-  FOR SELECT USING (auth.uid() = planner_id);
-
-ALTER TABLE commissions ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "service_only_commissions" ON commissions
-  FOR ALL USING (auth.role() = 'service_role');
-
-ALTER TABLE placements ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "planners_see_own_placements" ON placements
-  FOR SELECT USING (auth.uid() = planner_id);
+CREATE INDEX IF NOT EXISTS idx_planners_region ON planners(region);
+CREATE INDEX IF NOT EXISTS idx_planners_status ON planners(status);
+CREATE INDEX IF NOT EXISTS idx_enquiries_status ON couples_enquiries(status);
+CREATE INDEX IF NOT EXISTS idx_enquiries_region ON couples_enquiries(region);
+CREATE INDEX IF NOT EXISTS idx_placements_status ON placements(status);
+CREATE INDEX IF NOT EXISTS idx_commissions_planner ON commissions(planner_id);
+CREATE INDEX IF NOT EXISTS idx_commissions_status ON commissions(status);
