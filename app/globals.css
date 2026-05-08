@@ -577,7 +577,7 @@ footer {
 }
 
 .form-input::placeholder {
-  color: rgba(44,42,40,0.35);
+  color: rgba(44, 42, 40, 0.5);
 }
 
 textarea.form-input {
@@ -640,7 +640,7 @@ textarea.form-input {
 }
 
 .cta-section .form-input::placeholder {
-  color: rgba(248, 244, 236, 0.3);
+  color: rgba(248, 244, 236, 0.45);
 }
 
 .cta-section .form-input:focus {
