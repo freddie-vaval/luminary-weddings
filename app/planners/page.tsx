@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Our Planners — Luminary Weddings",
   description:
-    "Browse our curated network of exceptional UK wedding planners. Filter by region, style, and availability to find your perfect match.",
+    "Browse our curated network of exceptional UK wedding planners. Filter by region, style, and destination — including Italy, France, Greece, Spain, and beyond.",
 };
 
 export default function PlannersPage() {

@@ -21,6 +21,8 @@ CREATE TABLE planners (
   status TEXT DEFAULT 'pending',
   stripe_customer_id TEXT,
   stripe_account_id TEXT,
+  destination_services BOOLEAN DEFAULT false,
+  destination_countries TEXT[],
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
