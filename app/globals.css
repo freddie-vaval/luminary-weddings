@@ -555,7 +555,7 @@ footer {
   font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(248, 244, 236, 0.65);
+  color: var(--charcoal);
   margin-bottom: 8px;
 }
 
@@ -564,9 +564,9 @@ footer {
   font-family: var(--font-body);
   font-size: 1rem;
   padding: 14px 18px;
-  border: 1px solid rgba(201, 168, 76, 0.35);
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--cream);
+  border: 1px solid rgba(201,168,76,0.3);
+  background: var(--parchment);
+  color: var(--charcoal);
   transition: border-color 0.2s;
   border-radius: 0;
   outline: none;
@@ -574,11 +574,10 @@ footer {
 
 .form-input:focus {
   border-color: var(--gold);
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .form-input::placeholder {
-  color: rgba(248, 244, 236, 0.3);
+  color: rgba(44,42,40,0.35);
 }
 
 textarea.form-input {
@@ -627,4 +626,29 @@ textarea.form-input {
     flex-wrap: wrap;
     justify-content: center;
   }
+}
+
+/* ── Dark CTA section form overrides ── */
+.cta-section .form-label {
+  color: rgba(248, 244, 236, 0.65);
+}
+
+.cta-section .form-input {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(201, 168, 76, 0.35);
+  color: var(--cream);
+}
+
+.cta-section .form-input::placeholder {
+  color: rgba(248, 244, 236, 0.3);
+}
+
+.cta-section .form-input:focus {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cta-section select.form-input option {
+  background: var(--charcoal);
+  color: var(--cream);
 }
