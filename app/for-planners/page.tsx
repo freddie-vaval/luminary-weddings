@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import PlannerApplicationForm from "@/components/PlannerApplicationForm";
 
 export const metadata = {
   title: "For Planners — Luminary Weddings",
@@ -272,105 +273,7 @@ export default function ForPlannersPage() {
               Fill in the form below and we'll be in touch within 48 hours.
             </p>
 
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              style={{ textAlign: "left", display: "flex", flexDirection: "column", gap: "24px" }}
-            >
-              <div>
-                <label className="form-label">Your Name *</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="form-input"
-                  placeholder="Full name"
-                />
-              </div>
-              <div>
-                <label className="form-label">Company / Trading Name</label>
-                <input
-                  type="text"
-                  name="company"
-                  className="form-input"
-                  placeholder="Your company name"
-                />
-              </div>
-              <div>
-                <label className="form-label">Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="form-input"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <div>
-                <label className="form-label">Phone</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  className="form-input"
-                  placeholder="+44..."
-                />
-              </div>
-              <div>
-                <label className="form-label">Website</label>
-                <input
-                  type="url"
-                  name="website"
-                  className="form-input"
-                  placeholder="https://..."
-                />
-              </div>
-              <div>
-                <label className="form-label">Instagram Handle</label>
-                <input
-                  type="text"
-                  name="instagram"
-                  className="form-input"
-                  placeholder="@yourbusiness"
-                />
-              </div>
-              <div>
-                <label className="form-label">Primary Region *</label>
-                <select name="region" required className="form-input">
-                  <option value="">Select your region</option>
-                  <option>London</option>
-                  <option>Cotswolds</option>
-                  <option>Scotland</option>
-                  <option>Cornwall</option>
-                  <option>Yorkshire</option>
-                  <option>Lake District</option>
-                  <option>Other UK</option>
-                </select>
-              </div>
-              <div>
-                <label className="form-label">Typical Planning Fee Range *</label>
-                <select name="price_range" required className="form-input">
-                  <option value="">Select fee range</option>
-                  <option>Under £10k</option>
-                  <option>£10k–£20k</option>
-                  <option>£20k–£40k</option>
-                  <option>£40k–£75k</option>
-                  <option>£75k+</option>
-                </select>
-              </div>
-              <div>
-                <label className="form-label">Tell Us About Your Work *</label>
-                <textarea
-                  name="bio"
-                  required
-                  className="form-input"
-                  rows={4}
-                  placeholder="Describe your style, specialities, and what makes your planning approach unique..."
-                />
-              </div>
-
-              <button type="submit" className="btn btn-primary" style={{ alignSelf: "center", marginTop: "8px" }}>
-                Submit Application
-              </button>
-            </form>
+            <PlannerApplicationForm />
           </div>
         </div>
       </main>
