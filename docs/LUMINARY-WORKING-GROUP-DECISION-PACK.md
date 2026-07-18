@@ -7,7 +7,7 @@
 
 **Proceed to a 90-day concierge pilot, not a full marketplace launch.**
 
-> **Working-group commercial update:** The independent commercial review recommended a stronger hybrid test than the planner-only model below: charge the couple a **£295 refundable curation fee** after qualification, plus a **10% planner success fee capped at £2,000**. Founding planners would pay **7.5% capped at £1,250 for their first placement**. This should be discussed alongside the 15% planner-only option before any price is published. The group was unanimous that the historical uncapped 25% model should not launch.
+> **Working-group commercial update:** The independent commercial review recommended a stronger hybrid test than the planner-only model below: charge the couple a **£295 refundable curation fee** after qualification, plus a **10% planner success fee capped at £2,000**. Founding planners would pay **7.5% capped at £1,250 for their first placement**. This should be discussed alongside the 15% planner-only option before any price is published. The commercial review concluded that the historical uncapped 25% model should not launch; the operations review treats its mechanics as a decision still requiring validation.
 
 Luminary has a credible wedge if it is positioned as **private, human planner matchmaking for high-consideration UK and destination weddings**. It is not viable as another broad directory: Bridebook and Hitched already compete at directory scale. The first product should therefore be a managed service supported by simple software, not a large platform.
 
