@@ -7,6 +7,8 @@
 
 **Proceed to a 90-day concierge pilot, not a full marketplace launch.**
 
+> **Working-group commercial update:** The independent commercial review recommended a stronger hybrid test than the planner-only model below: charge the couple a **£295 refundable curation fee** after qualification, plus a **10% planner success fee capped at £2,000**. Founding planners would pay **7.5% capped at £1,250 for their first placement**. This should be discussed alongside the 15% planner-only option before any price is published. The group was unanimous that the historical uncapped 25% model should not launch.
+
 Luminary has a credible wedge if it is positioned as **private, human planner matchmaking for high-consideration UK and destination weddings**. It is not viable as another broad directory: Bridebook and Hitched already compete at directory scale. The first product should therefore be a managed service supported by simple software, not a large platform.
 
 ### Why it may work
@@ -259,6 +261,32 @@ Assume Luminary failed after six months:
 | Paid ads consume all revenue | CAC approaches likely commission | Founder/partner/SEO channels first; cap experiments |
 | Website overstates reality | Visitors see invented proof | Publish only verified planners, testimonials and case studies |
 | Operations cannot respond quickly | Briefs wait over one working day | Small launch volume, named operator and SLA dashboard |
+
+## 11. Independent working-group counterproposal
+
+The commercial reviewer pressure-tested planner willingness against Bark, Bridebook and venue/network referrals and recommended testing a **buyer-paid concierge plus lower planner commission**:
+
+- Couple pays **£295 after qualification** and before curation begins.
+- Refund the £295 if Luminary cannot provide at least two suitable, available planners within five working days.
+- Planner pays **10% of professional planning/design fees**, excluding VAT and pass-through costs.
+- Planner success fee: **£750 minimum, £2,000 maximum**.
+- Founding planner's first placement: **7.5%, capped at £1,250**.
+- Planner approves each brief before identity/contact details are shared.
+- No blanket exclusivity and no higher quote for Luminary couples.
+
+The buyer fee funds unsuccessful matching work and tests whether couples truly value independent curation. The group should decide between this hybrid model and the simpler 15% planner-only pilot; **the uncapped 25% model should not launch**.
+
+### Stronger 90-day validation targets
+
+- Interview 30 established planners; sign 10 and keep at least six active.
+- At least 70% of qualified planners accept the capped 10% standard model.
+- Generate 60 qualified £75,000+ wedding enquiries.
+- Convert at least 35% of qualified enquiries into £295 paid briefs.
+- Provide two accepted planner options within five working days for at least 80% of paid briefs.
+- Achieve three confirmed placements, or two placements plus three final-stage proposals.
+- Keep acquisition cost per paid brief at or below £150.
+- Keep concierge effort at or below 2.5 hours per paid brief.
+- Reach at least £750 contribution per confirmed booking.
 
 ## Sources
 
